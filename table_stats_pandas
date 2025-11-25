@@ -1,0 +1,37 @@
+import pandas as pd
+import gc
+
+def table_stats_pandas(df: pd.DataFrame, dataframe_name: str) -> None:
+    """
+    Function aim is to record record and column counts, and some additional metadata stats
+    - ARGS:
+        - df: Pandas DataFrame as the input
+        - dataframe_name: Str to determine name of dataset
+    - RETURNS:
+        - Number of records and columns found in dataframe
+        - Descriptive statistics of dataframe
+        - Top 3 records of Dataset
+    - WHY:
+        - See at a glance the structure of your dataset without extra work.
+    """
+    #---------------------------------------
+    # Record and column counts
+    #---------------------------------------
+    total_records, total_columns = df.shape
+    print(f"The {dataframe_name} Pandas DataFrame has:\n{total_records} Records,\n{total_columns} Columns")
+
+    #---------------------------------------
+    # Descriptive statistics
+    #---------------------------------------
+    display(df.describe(include='all'))  # include='all' shows stats for numeric + categorical
+
+    #---------------------------------------
+    # Top 3 records
+    #---------------------------------------
+    display(df.head(3))
+
+    #---------------------------------------
+    # Clean up
+    #---------------------------------------
+    gc.collect()
+    return None
