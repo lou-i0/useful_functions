@@ -1,6 +1,7 @@
 import pandas as py 
 import seaborn as sns 
 import matplotlib.pyplot as plt
+import gc as gc
 ''' function for heat pivot '''
 #=======================================
 #FUNCTION : heatmap based on crosstab
