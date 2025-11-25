@@ -1,7 +1,7 @@
 import pandas as pd
 import gc
 
-def null_check_pandas(df: pd.DataFrame) -> None:
+def null_check_pandas(dataframe: pd.DataFrame,dataframe_name:str = '') -> None:
     """
     - FUNCTION:
         - Take record count of Pandas DataFrame
@@ -14,20 +14,23 @@ def null_check_pandas(df: pd.DataFrame) -> None:
     - RETURNS:
         Prints summary and displays subset with nulls
     """
+    print('#=======================================')
+    print(f'☑️🔋INFO: Performing null Check on Dataset: {dataframe_name}')
+    print('#=======================================')
     #---------------------------------------
     # Total records
     #---------------------------------------
-    total_records = len(df)
+    total_records = len(dataframe)
 
     #---------------------------------------
     # Null count per column
     #---------------------------------------
-    null_summary = df.isnull().sum()
+    null_summary = dataframe.isnull().sum()
 
     #---------------------------------------
     # Records with any nulls
     #---------------------------------------
-    df_nulls = df[df.isnull().any(axis=1)]
+    df_nulls = dataframe[dataframe.isnull().any(axis=1)]
     null_record_count = len(df_nulls)
 
     print(f'📊 Total Records from dataset: {total_records}')
@@ -43,10 +46,18 @@ def null_check_pandas(df: pd.DataFrame) -> None:
             print(f' - {col_name}: {nulls} nulls ({round(nulls / total_records * 100, 2)}%)')
 
     #---------------------------------------
+    # Show all null records in datset
+    #---------------------------------------
+    print('\n🧾 Showing all null records in dataset:')
+    display(df_nulls)
+    print('#=======================================')
+    print(f'✅🏁INFO: Null Check Completed on Dataset: {dataframe_name}')
+    print('#=======================================')
+
+    #---------------------------------------
     # Clean up
     #---------------------------------------
     del total_records, null_summary, null_record_count
     gc.collect()
 
-    # Display affected records
-    display(df_nulls)
+    # null_check_pandas(df.toPandas())
